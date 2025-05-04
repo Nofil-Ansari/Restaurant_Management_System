@@ -147,4 +147,8 @@ print(customer1)
 print(customer1.reservations)
 print(order1)
 print(order1.order_details)
+<<<<<<< HEAD
 print(order1.payment)#
+=======
+print(order1.payment)
+>>>>>>> 66c11b1 (stage 1 of making  class objects and relationships)
