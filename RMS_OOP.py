@@ -40,6 +40,8 @@ class Tables:
         self.table_num = table_num
         self.capacity = capacity
         self.status = status
+    def is_available(self):
+        return self.status == "Available"
     def __str__(self):
         return f"Table ID: {self.tableID}, Table Number: {self.table_num}, Capacity: {self.capacity}, Status: {self.status}"
     def __repr__(self):
@@ -75,6 +77,12 @@ class Orders:
         self.total_amount = total_amount
         self.status = status
         self.order_details = [] #One to many relationship of Orders with Order Details
+        self.payment = None  # One-to-one relationship with Payment
+    def add_order_detail(self, order_detail):
+        self.order_details.append(order_detail)
+
+    def add_payment(self, payment):
+        self.payment = payment
     def __str__(self):
         return f"Order ID: {self.orderID}, Customer ID: {self.customerID}, Table ID: {self.tableID}, Menu ID: {self.menuID}, Order Date: {self.order_date}, Total Amount: {self.total_amount}, Status: {self.status}"
     def __repr__(self):
@@ -91,4 +99,52 @@ class Payment:
         return f"Payment ID: {self.paymentID}, Order ID: {self.orderID}, Payment Type: {self.payment_type}, Amount Paid: {self.amount_paid}, Payment Date: {self.payment_date}"
     def __repr__(self):
         return f"Payment({self.paymentID!r}, {self.orderID!r}, {self.payment_type!r}, {self.amount_paid!r}, {self.payment_date!r})"
-        
+class OrderDetails:
+    def __init__(self,Order_Detail_ID, Order_ID, Item_ID, Quantity, Price ):
+        self.Order_Detail_ID = Order_Detail_ID
+        self.Order_ID = Order_ID
+        self.Item_ID = Item_ID
+        self.Quantity = Quantity
+        self.Price = Price
+    def __str__(self):
+        return f"Order Detail ID: {self.Order_Detail_ID}, Order ID: {self.Order_ID}, Item ID: {self.Item_ID}, Quantity: {self.Quantity}, Price: {self.Price}"
+    def __repr__(self):
+        return f"OrderDetails({self.Order_Detail_ID!r}, {self.Order_ID!r}, {self.Item_ID!r}, {self.Quantity!r}, {self.Price!r})"
+
+
+
+
+# Creating a Customer
+customer1 = Customer(customerID=1, name="John Doe", contact_num="12345678901", email="john.doe@example.com")
+
+# Creating Tables
+table1 = Tables(tableID=1, table_num=101, capacity=4, status="Available")
+table2 = Tables(tableID=2, table_num=102, capacity=2, status="Occupied")
+
+# Creating Reservations
+reservation1 = Reservations(ReservationID=1, customerID=customer1.customerID, tableID=table1.tableID, reservation_date="2025-05-04", status="Confirmed")
+#customer1.add_reservation(reservation1)
+
+# Creating Menu Items
+menu_item1 = Menu(menuID=1, menu_item_name="Pasta", price=12.99)
+menu_item2 = Menu(menuID=2, menu_item_name="Pizza", price=15.99)
+
+# Creating an Order
+order1 = Orders(orderID=1, customerID=customer1.customerID, tableID=table1.tableID, menuID=menu_item1.menuID, order_date="2025-05-04", total_amount=25.98, status="Completed")
+
+# Adding Order Details
+order_detail1 = OrderDetails(Order_Detail_ID=1, Order_ID=order1.orderID, Item_ID=menu_item1.menuID, Quantity=1, Price=12.99)
+order_detail2 = OrderDetails(Order_Detail_ID=2, Order_ID=order1.orderID, Item_ID=menu_item2.menuID, Quantity=1, Price=15.99)
+order1.add_order_detail(order_detail1)
+order1.add_order_detail(order_detail2)
+
+# Creating a Payment
+payment1 = Payment(paymentID=1, orderID=order1.orderID, payment_type="Credit Card", amount_paid=25.98, payment_date="2025-05-04")
+order1.add_payment(payment1)
+
+# Printing the objects to verify relationships
+print(customer1)
+print(customer1.reservations)
+print(order1)
+print(order1.order_details)
+print(order1.payment)
