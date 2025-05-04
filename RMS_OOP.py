@@ -1,3 +1,4 @@
+import random as rd
 class Employees:
     def __init__(self, employeeID, name, age, salary,Contact_num,hire_date):
         self.employeeID = employeeID
@@ -115,7 +116,17 @@ class OrderDetails:
 
 
 # Creating a Customer
-customer1 = Customer(customerID=1, name="John Doe", contact_num="12345678901", email="john.doe@example.com")
+def customer_procedure():
+    input_customerID = rd.randint(1, 1000)
+    input_name = input("Enter Customer Name: ")
+    input_contact_num = input("Enter Contact Number (11 digits): ")
+    input_email = input("Enter Email: ")
+    customer = Customer(customerID=input_customerID, name=input_name, contact_num=input_contact_num, email=input_email)
+    #print(f'Customer created: {customer}')
+    return customer
+
+customer1 = customer_procedure()    
+#customer1 = Customer(customerID=1, name="John Doe", contact_num="12345678901", email="john.doe@example.com")
 
 # Creating Tables
 table1 = Tables(tableID=1, table_num=101, capacity=4, status="Available")
@@ -123,6 +134,7 @@ table2 = Tables(tableID=2, table_num=102, capacity=2, status="Occupied")
 
 # Creating Reservations
 reservation1 = Reservations(ReservationID=1, customerID=customer1.customerID, tableID=table1.tableID, reservation_date="2025-05-04", status="Confirmed")
+
 #customer1.add_reservation(reservation1)
 
 # Creating Menu Items
@@ -155,5 +167,3 @@ print(repr(order1))
 print(repr(order1.order_details))
 print(repr(order1.payment))
 
-def object_database():
-    
