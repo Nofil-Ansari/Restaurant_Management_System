@@ -1,5 +1,5 @@
 class Employees:
-    def __init__(self, employeeID name, age, salary,Contact_num,hire_date):
+    def __init__(self, employeeID, name, age, salary,Contact_num,hire_date):
         self.employeeID = employeeID
         self.name = name       
         self.age = age
