@@ -154,7 +154,7 @@ order1.add_order_detail(order_detail2)
 payment1 = Payment(paymentID=1, orderID=order1.orderID, payment_type="Credit Card", amount_paid=25.98, payment_date="2025-05-04")
 order1.add_payment(payment1)
 
-<<<<<<< HEAD
+
 # Printing the objects to verify relationships using __str__ and __repr__
 print(str(customer1))
 print(str(customer1.reservations))
@@ -168,15 +168,11 @@ print(repr(order1))
 print(repr(order1.order_details))
 print(repr(order1.payment))
 
-=======
+
 # Printing the objects to verify relationships
 print(customer1)
 print(customer1.reservations)
 print(order1)
 print(order1.order_details)
-<<<<<<< HEAD
-print(order1.payment)#
-=======
 print(order1.payment)
->>>>>>> 66c11b1 (stage 1 of making  class objects and relationships)
->>>>>>> main
+print(order1.payment)
