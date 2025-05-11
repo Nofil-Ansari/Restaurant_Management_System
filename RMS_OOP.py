@@ -1,6 +1,17 @@
-import random as rd
-class Employees:
+import random as 
+class RestaruantManagementSystem:
+    def __init__(self,name,contact_num):
+        self.name = name
+        self.contact_num = contact_num
+        self.employees = [] # One to many relationship of Restaurant with Employees
+        self.customers = [] # One to many relationship of Restaurant with Customers
+        self.tables = [] # One to many relationship of Restaurant with Tables
+        self.reservations = [] # One to many relationship of Restaurant with Reservations
+        
+        pass
+class Employees(RestaruantManagementSystem):
     def __init__(self, employeeID, name, age, salary,Contact_num,hire_date):
+        super().__init__(name,Contact_num)
         self.employeeID = employeeID
         self.name = name       
         self.age = age
@@ -117,10 +128,11 @@ class OrderDetails:
 
 # Creating a Customer
 def customer_procedure():
-    input_customerID = rd.randint(1, 1000)
+    input_customerID = f'24K- {str(rd.randint(1000, 6000))}'
     input_name = input("Enter Customer Name: ")
-    input_contact_num = input("Enter Contact Number (11 digits): ")
-    input_email = input("Enter Email: ")
+    input_contact_num = '03'+''.join(rd.choice('0123456789') for _ in range(9))
+
+    input_email = f'k24{rd.randint(1000, 6000)}@nu.edu.pk'
     customer = Customer(customerID=input_customerID, name=input_name, contact_num=input_contact_num, email=input_email)
     #print(f'Customer created: {customer}')
     return customer
@@ -130,7 +142,7 @@ customer1 = customer_procedure()
 # Creating Tables
 def table_procedure():
     input_tableID = rd.randint(1, 100)
-    input_table_num = int(input("Enter Table Number: "))
+    input_table_num = rd.randint(1, 7)
     input_capacity = rd.randint(1,4)
     input_status = rd.choice(["Available", "Reserved"])
     table = Tables(tableID=input_tableID, table_num=input_table_num, capacity=input_capacity, status=input_status)
@@ -141,9 +153,9 @@ table1 = table_procedure()
 # Creating Reservations
 def reservation_procedure():
     input_reservationID = rd.randint(1, 1000)
-    input_customerID = int(input("Enter Customer ID: "))
-    input_tableID = int(input("Enter Table ID: "))
-    input_reservation_date = input("Enter Reservation Date (YYYY-MM-DD): ")
+    input_customerID = customer1.customerID
+    input_tableID = table1.tableID
+    input_reservation_date = f"2025-{rd.randint(1,12)}-{rd.randint(1,31)}"
     input_status = f"Enter Reservation Status {rd.choice(["Available", "Reserved"])}: "
     reservation = Reservations(ReservationID=input_reservationID, customerID=input_customerID, tableID=input_tableID, reservation_date=input_reservation_date, status=input_status)
     return reservation
@@ -169,22 +181,19 @@ order1.add_payment(payment1)
 
 
 # Printing the objects to verify relationships using __str__ and __repr__
-print(str(customer1))
-print(str(customer1.reservations))
-print(str(order1))
-print(str(order1.order_details))
-print(str(order1.payment))
+#print(str(customer1))
+#print(str(customer1.reservations))
+#print(str(order1))
+#print(str(order1.order_details))
+#print(str(order1.payment))
 print('-------------------------------------------------------------------------------')
 print(repr(customer1))
 print(repr(customer1.reservations))
 print(repr(order1))
 print(repr(order1.order_details))
 print(repr(order1.payment))
-
-
 # Printing the objects to verify relationships
 print(customer1)
-
 print(customer1.reservations)
 print(order1)
 print(order1.order_details)
