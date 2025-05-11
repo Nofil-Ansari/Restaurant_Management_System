@@ -1,4 +1,4 @@
-import random as 
+import random as rd
 class RestaruantManagementSystem:
     def __init__(self,name,contact_num):
         self.name = name
