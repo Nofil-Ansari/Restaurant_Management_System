@@ -126,15 +126,28 @@ def customer_procedure():
     return customer
 
 customer1 = customer_procedure()    
-#customer1 = Customer(customerID=1, name="John Doe", contact_num="12345678901", email="john.doe@example.com")
 
 # Creating Tables
-table1 = Tables(tableID=1, table_num=101, capacity=4, status="Available")
-table2 = Tables(tableID=2, table_num=102, capacity=2, status="Occupied")
+def table_procedure():
+    input_tableID = rd.randint(1, 100)
+    input_table_num = int(input("Enter Table Number: "))
+    input_capacity = rd.randint(1,4)
+    input_status = rd.choice(["Available", "Reserved"])
+    table = Tables(tableID=input_tableID, table_num=input_table_num, capacity=input_capacity, status=input_status)
+    return table
+#creating table objects
+table1 = table_procedure()
 
 # Creating Reservations
-reservation1 = Reservations(ReservationID=1, customerID=customer1.customerID, tableID=table1.tableID, reservation_date="2025-05-04", status="Confirmed")
-
+def reservation_procedure():
+    input_reservationID = rd.randint(1, 1000)
+    input_customerID = int(input("Enter Customer ID: "))
+    input_tableID = int(input("Enter Table ID: "))
+    input_reservation_date = input("Enter Reservation Date (YYYY-MM-DD): ")
+    input_status = f"Enter Reservation Status {rd.choice(["Available", "Reserved"])}: "
+    reservation = Reservations(ReservationID=input_reservationID, customerID=input_customerID, tableID=input_tableID, reservation_date=input_reservation_date, status=input_status)
+    return reservation
+reservation1 = reservation_procedure()
 #customer1.add_reservation(reservation1)
 
 # Creating Menu Items
@@ -171,8 +184,9 @@ print(repr(order1.payment))
 
 # Printing the objects to verify relationships
 print(customer1)
+
 print(customer1.reservations)
 print(order1)
 print(order1.order_details)
 print(order1.payment)
-print(order1.payment)
+
