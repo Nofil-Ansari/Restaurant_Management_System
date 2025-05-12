@@ -84,9 +84,6 @@ class OrderDetails:
     def __repr__(self):
         return f"OrderDetails({self.Order_Detail_ID!r}, {self.Order_ID!r}, {self.Item_ID!r}, {self.Quantity!r}, {self.Price!r})"
 
-
-
-
 # Creating a Customer
 def customer_procedure():
     input_customerID = f'24K- {str(rd.randint(1000, 6000))}'
@@ -229,4 +226,6 @@ def display_all_payments(payments):
     for payment in payments:
         print(f"Payment ID: {payment.paymentID}\n Order ID: {payment.orderID}\n Payment Type: {payment.payment_type}\n Amount Paid: {payment.amount_paid}\n Payment Date: {payment.payment_date}")
     print("-------------------------------------------------")
+
 display_all_payments([payment1])
+
