@@ -117,7 +117,7 @@ def reservation_procedure():
     input_customerID = customer1.customerID
     input_tableID = table1.tableID
     input_reservation_date = f"2025-{rd.randint(1,12)}-{rd.randint(1,31)}"
-    input_status = f"Enter Reservation Status {rd.choice(["Available", "Reserved"])}: "
+    input_status = f"Reservation Status is : {rd.choice(["Available", "Reserved"])}: "
     reservation = Reservations(ReservationID=input_reservationID, customerID=input_customerID, tableID=input_tableID, reservation_date=input_reservation_date, status=input_status)
     return reservation
 reservation1 = reservation_procedure()
@@ -140,7 +140,7 @@ def order_procedure():
     customerID = customer1.customerID
     tableID = table1.tableID
     menuID = menu_item1.menuID
-    order_date = f"2025-{rd.randint(1,12)}-{rd.randint(1,31)}"
+    order_date = f"2025-{rd.choice(['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'])}-{rd.randint(1,31)}"
     total_amount = menu_item1.price + menu_item2.price
     status = rd.choice(["Pending", "Completed", "Cancelled"])
     order = Orders(orderID=orderID, customerID=customerID, tableID=tableID, menuID=menuID, order_date=order_date, total_amount=total_amount, status=status)
